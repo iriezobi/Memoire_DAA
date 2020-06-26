@@ -1,0 +1,218 @@
+% template adapted from https://github.com/jgm/pandoc-templates/blob/master/default.latex
+
+%%% STYLE %%%
+\documentclass[12pt,$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+
+%%% PACKAGES %%%
+
+% fontsl
+% unfortunately INPHB is asking for times new roman
+\usepackage{times} 
+% \usepackage{lmodern}
+
+% pdf
+\usepackage{pdfpages}
+
+% formulae
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Tables
+$if(tables)$
+% pacakges for kableextra
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+% \usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+$endif$
+
+% graphics
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+% indent
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+
+% prevent overfull lines
+\setlength{\emergencystretch}{3em}  
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\setcounter{secnumdepth}{0}
+
+% set default figure placement to htbp
+\makeatletter 
+\def\fps@figure{htbp}
+\makeatother
+
+% set default table placement to htbp
+\makeatletter 
+\def\fps@table{htbp}
+\makeatother
+
+% code highlights
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% paragraphs
+% beware this make the toc bug if hyperref is placed before
+\usepackage{titlesec}
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+\titleformat{\section}
+{\huge\center\scshape}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+\titleformat*{\subsection}{\LARGE\bfseries}
+\titleformat*{\subsubsection}{\Large\bfseries}
+\titleformat*{\paragraph}{\large\bfseries\itshape}
+\titleformat*{\subparagraph}{\normalsize\itshape}
+
+% hyperlinks
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{%
+\usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+$if(verbatim-in-note)$
+  \usepackage{fancyvrb}
+$endif$
+\usepackage[unicode=true]{hyperref}
+$if(colorlinks)$
+  \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+$endif$
+\definecolor{maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\hypersetup{
+  $if(colorlinks)$
+    colorlinks=true,
+    linkcolor=maroon,
+    citecolor=blue,
+    urlcolor=blue,
+  $else$
+    pdfborder={0 0 0},
+  $endif$
+    breaklinks=true}
+\urlstyle{same} % don't use monospace font for urls
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+
+% geometry
+\usepackage[left=2.5cm,right=2.5cm,top=1.5cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.5}
+
+% multiple columns and boxes for title page
+\usepackage{multicol}
+\usepackage{fancybox,framed}
+
+% Bibliography
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+% citations
+\usepackage{epigraph}
+
+% language
+\usepackage{tocbibind}
+\renewcommand{\contentsname}{Table des matières}
+\renewcommand{\listfigurename}{Liste des figures}
+\renewcommand{\listtablename}{Liste des tables}
+
+%%% BODY %%%
+\begin{document}
+
+% First pages
+% $for(include-before)$
+%   $include-before$
+% $endfor$
+
+% First page
+
+\begin{center}
+  \vspace*{\stretch{1}}
+  \small{\textbf{REPUBLIQUE DE CÔTE D'IVOIRE}} \\
+  \includegraphics[width=0.2\columnwidth]{images/union-discipline-travail.png} \\
+  \scriptsize{\textbf{Union-Discipline-Travail}} \\
+  \small{\textbf{MINISTERE DE L'ENSEIGNEMENT SUPERIEUR ET DE LA RECHERCHE SCIENTIFIQUE}} \\
+  \includegraphics[]{images/INPHB.png}
+  \textbf{É}COLE \textbf{S}UPÉRIEURE D’\textbf{A}GRONOMIE \textbf{(ESA)} \\
+  \small{Cycle des Ingénieurs Agronomes} \\
+  \vspace*{\fill}
+  \Large{\textbf{MÉMOIRE DE FIN D’ÉTUDES}} \\
+  \small{Pour l’obtention du \textbf{D}iplôme d’\textbf{A}gronomie \textbf{A}pprofondie (\textbf{D.A.A})} \\
+  \vspace*{\fill}
+  Option : \textbf{$option$} \\
+  \vspace*{\fill}
+  Thème : \\
+  \doublebox{\parbox{0.9\columnwidth}{\center{\Large{\textbf{$title$}}}}} \\
+  \vspace*{\fill}
+  \small{\underline{\textbf{Présenté par}}} \\
+  \small{\textbf{$author$}} \\
+  \small{Élève Ingénieur $type$ de la $promotion$\textsuperscript{ème} promotion ENSA} \\
+  \vspace*{\fill}
+  \begin{multicols}{2}
+    \small{\underline{\textbf{Encadreur pédagogique}}} \\
+    \small{\textbf{$encadreur_pedagogique$}} \\
+    \columnbreak
+    \small{\underline{\textbf{Encadreur de terrain}}} \\
+    \small{\textbf{$encadreur_terrain$}} \\
+  \end{multicols}
+  \vspace*{\fill}
+  \small{Année académique : $date$} \\
+  \vspace*{\stretch{1}}
+\end{center}
+
+% Second page
+\newpage
+\vspace*{\fill}
+\epigraph{$epigraph.text$}{\textit{$epigraph.author$}}
+\vspace*{\fill}
+\emph{Les opinions émises par les auteurs sont personnelles et n'engagent pas l'INP-HB.}
+\newpage
+
+% toc, lot, and lof have been moved within the body after summary and before introduction
+% \tableofcontents
+% \listoftables
+% \listoffigures
+
+$body$
+
+% bibliography in the body to be before annexes
+% \addcontentsline{toc}{section}{References}
+\bibliography{$bibliography$}
+% \listoftables
+% \listoffigures
+
+% Last pages
+% $for(include-after)$
+%   $include-after$
+% $endfor$
+
+\end{document}

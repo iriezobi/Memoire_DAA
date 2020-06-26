@@ -1,0 +1,7 @@
+<!-- N'écrivez rien ici, ce document génère automatiquement la liste de vos références -->
+
+# Références bibliographiques
+
+<div id="refs"></div>
+
+\newpage

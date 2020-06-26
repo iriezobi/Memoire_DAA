@@ -1,0 +1,7 @@
+book_filename: "memoire"
+output_dir: "docs"
+language:
+  ui:
+    edit: Edit
+    chapter_name: ""
+clean: ["memoire.Rmd", "memoire.knit.md", "memoire.utf8.md"]
